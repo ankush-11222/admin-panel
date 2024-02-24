@@ -34,6 +34,13 @@ export const endpoints = {
     login: '/authenticate',
     register: '/api/auth/register',
   },
+  users: {
+    byArea: 'api/user/getUsersWithArea',
+  },
+  branches: {
+    getBranches: '/api/getAllBranch',
+    areaCodes: '/api/areaCodes',
+  },
   mail: {
     list: '/api/mail/list',
     details: '/api/mail/details',

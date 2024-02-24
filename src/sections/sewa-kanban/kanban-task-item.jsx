@@ -16,6 +16,9 @@ import { bgBlur } from 'src/theme/css';
 import Iconify from 'src/components/iconify';
 
 import KanbanDetails from './kanban-details';
+import { use } from 'i18next';
+import { useEffect } from 'react';
+import { IconButton, Tooltip } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +26,12 @@ export default function KanbanTaskItem({ task, index, onDeleteTask, onUpdateTask
   const theme = useTheme();
 
   const openDetails = useBoolean();
+
+  const isStared = useBoolean();
+
+  const onStared = () => {
+    isStared.onToggle();
+  };
 
   const renderPriority = (
     <Iconify
@@ -41,7 +50,7 @@ export default function KanbanTaskItem({ task, index, onDeleteTask, onUpdateTask
         ...(task.priority === 'medium' && {
           color: 'warning.main',
         }),
-        ...(task.priority === 'hight' && {
+        ...(task.priority === 'high' && {
           color: 'error.main',
         }),
       }}
@@ -79,13 +88,19 @@ export default function KanbanTaskItem({ task, index, onDeleteTask, onUpdateTask
           color: 'text.disabled',
         }}
       >
-        <Iconify width={16} icon="solar:chat-round-dots-bold" sx={{ mr: 0.25 }} />
+        {/* <Iconify width={16} icon="solar:chat-round-dots-bold" sx={{ mr: 0.25 }} />
         <Box component="span" sx={{ mr: 1 }}>
           {task.comments.length}
-        </Box>
+        </Box> */}
 
         <Iconify width={16} icon="eva:attach-2-fill" sx={{ mr: 0.25 }} />
         <Box component="span">{task.attachments.length}</Box>
+
+        <Tooltip title="Stared">
+          <IconButton color="primary" onClick={onStared}>
+            <Iconify icon={isStared ? 'eva:star-fill' : 'eva:star-outline'} />
+          </IconButton>
+        </Tooltip>
       </Stack>
 
       <AvatarGroup

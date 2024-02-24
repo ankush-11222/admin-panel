@@ -68,8 +68,8 @@ export default function KanbanDetailsToolbar({
 
         <Stack direction="row" justifyContent="flex-end" flexGrow={1}>
           <Tooltip title="Like">
-            <IconButton color={liked ? 'default' : 'primary'} onClick={onLike}>
-              <Iconify icon="ic:round-thumb-up" />
+            <IconButton color="primary" onClick={onLike}>
+              <Iconify icon={liked ? 'eva:star-fill' : 'eva:star-outline'} />
             </IconButton>
           </Tooltip>
 

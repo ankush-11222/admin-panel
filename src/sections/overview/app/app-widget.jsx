@@ -11,7 +11,16 @@ import Chart, { useChart } from 'src/components/chart';
 
 // ----------------------------------------------------------------------
 
-export default function AppWidget({ title, total, icon, color = 'primary', chart, sx, ...other }) {
+export default function AppWidget({
+  title,
+  total,
+  icon,
+  color = 'primary',
+  chart,
+  sx,
+  showMenu,
+  ...other
+}) {
   const theme = useTheme();
 
   const { series, options } = chart;
@@ -82,7 +91,7 @@ export default function AppWidget({ title, total, icon, color = 'primary', chart
       />
 
       <ListItemText
-        sx={{ ml: 3 }}
+        sx={{ ml: 1 }}
         primary={fNumber(total)}
         secondary={title}
         primaryTypographyProps={{

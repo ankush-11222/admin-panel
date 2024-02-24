@@ -16,6 +16,7 @@ import { KanbanColumnSkeleton } from '../kanban-skeleton';
 import { Button, Card, CardContent, Grid, Paper } from '@mui/material';
 import AppWidget from 'src/sections/overview/app/app-widget';
 import Iconify from 'src/components/iconify';
+import { KanbanProjects } from '../kaban-projects';
 // import { Button } from '@mui/material';
 
 // ----------------------------------------------------------------------
@@ -117,61 +118,8 @@ export default function KanbanView() {
         height: 1,
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        flexWrap="nowrap"
-        sx={{ overflow: 'scroll' }}
-        py={3}
-        alignItems="center"
-      >
-        <Grid item lg={3} sx={{ flexShrink: 0 }}>
-          <AppWidget
-            title="Gurupurnima"
-            color="primary"
-            chart={{
-              series: 48,
-            }}
-          />
-        </Grid>
-        <Grid item lg={3} sx={{ flexShrink: 0 }}>
-          <AppWidget
-            title="Project this"
-            color="primary"
-            chart={{
-              series: 48,
-            }}
-          />
-        </Grid>
-        <Grid item lg={3} sx={{ flexShrink: 0 }}>
-          <AppWidget
-            title="Project that"
-            color="primary"
-            chart={{
-              series: 48,
-            }}
-          />
-        </Grid>
-        <Grid item lg={3} sx={{ flexShrink: 0 }}>
-          <AppWidget
-            title="Project now"
-            color="primary"
-            chart={{
-              series: 48,
-            }}
-          />
-        </Grid>
-        <Grid item lg={3} sx={{ flexShrink: 0 }}>
-          <AppWidget
-            title="Project then"
-            color="primary"
-            chart={{
-              series: 48,
-            }}
-          />
-        </Grid>
-      </Grid>
-      <Button>Add Tasks</Button>
+      <KanbanProjects />
+
       {boardLoading && renderSkeleton}
 
       {boardEmpty && (
@@ -215,6 +163,7 @@ export default function KanbanView() {
                       key={columnId}
                       column={board?.columns[columnId]}
                       tasks={board?.tasks}
+                      showAddButton={index === 0}
                     />
                   ))}
 

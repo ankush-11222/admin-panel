@@ -27,7 +27,7 @@ import KanbanColumnToolBar from './kanban-column-tool-bar';
 
 // ----------------------------------------------------------------------
 
-export default function KanbanColumn({ column, tasks, index }) {
+export default function KanbanColumn({ column, tasks, index, showAddButton }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const openAddTask = useBoolean();
@@ -123,7 +123,8 @@ export default function KanbanColumn({ column, tasks, index }) {
       <Button
         fullWidth
         size="small"
-        color="inherit"
+        color="primary"
+        variant="outlined"
         startIcon={
           <Iconify
             icon={openAddTask.value ? 'solar:close-circle-broken' : 'mingcute:add-line'}
@@ -132,7 +133,7 @@ export default function KanbanColumn({ column, tasks, index }) {
           />
         }
         onClick={openAddTask.onToggle}
-        sx={{ fontSize: 14 }}
+        sx={{ fontSize: 14, py: 2 }}
       >
         {openAddTask.value ? 'Close' : 'Add Task'}
       </Button>
@@ -173,6 +174,7 @@ export default function KanbanColumn({ column, tasks, index }) {
                     width: 280,
                   }}
                 >
+                  {showAddButton && renderAddTask}
                   {column.taskIds.map((taskId, taskIndex) => (
                     <KanbanTaskItem
                       key={taskId}
@@ -197,4 +199,5 @@ KanbanColumn.propTypes = {
   column: PropTypes.object,
   index: PropTypes.number,
   tasks: PropTypes.object,
+  showAddButton: PropTypes.boolean,
 };

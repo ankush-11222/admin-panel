@@ -25,6 +25,7 @@ import KanbanDetailsPriority from './kanban-details-priority';
 import KanbanDetailsAttachments from './kanban-details-attachments';
 import KanbanDetailsCommentList from './kanban-details-comment-list';
 import KanbanDetailsCommentInput from './kanban-details-comment-input';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -110,7 +111,7 @@ export default function KanbanDetails({
 
   const renderReporter = (
     <Stack direction="row" alignItems="center">
-      <StyledLabel>Reporter</StyledLabel>
+      <StyledLabel>Created by</StyledLabel>
       <Avatar alt={task.reporter.name} src={task.reporter.avatarUrl} />
     </Stack>
   );
@@ -283,10 +284,15 @@ export default function KanbanDetails({
 
           {renderDescription}
 
-          {renderAttachments}
+          {/* {renderAttachments} */}
+          <Divider variant="" />
+          <Button size="medium" variant="outlined">
+            <Iconify sx={{ mr: 1 }} icon="mingcute:save-2-line" />
+            <Typography variant="h6">Save</Typography>
+          </Button>
         </Stack>
 
-        {!!task.comments.length && renderComments}
+        {/* {!!task.comments.length && renderComments} */}
       </Scrollbar>
 
       {/* <KanbanDetailsCommentInput /> */}

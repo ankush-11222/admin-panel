@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,6 +13,13 @@ import ListItemText from '@mui/material/ListItemText';
 import DialogContent from '@mui/material/DialogContent';
 import InputAdornment from '@mui/material/InputAdornment';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Grid from '@mui/material/Grid';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
 
 import { _contacts } from 'src/_mock';
 
@@ -20,12 +27,17 @@ import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import SearchNotFound from 'src/components/search-not-found';
 
+// import axios, { endpoints } from 'src/utils/axios';
+
 // ----------------------------------------------------------------------
 
 const ITEM_HEIGHT = 64;
 
 export default function KanbanContactsDialog({ assignee = [], open, onClose }) {
   const [searchContact, setSearchContact] = useState('');
+  // const [users, setUsers] = useState([]);
+  // const [branches, setBranches] = useState([]);
+  // const [areas, setAreas] = useState([]);
 
   const handleSearchContacts = useCallback((event) => {
     setSearchContact(event.target.value);
@@ -36,28 +48,172 @@ export default function KanbanContactsDialog({ assignee = [], open, onClose }) {
     query: searchContact,
   });
 
+  useEffect(async () => {
+    // try {
+    //   const usersPromise = await axios.get(`/${endpoints.users.byArea}/NRL-01`);
+    //   const branchesPromise = await axios.get(`/${endpoints.branches.getBranches}`);
+    //   const areaCodesPromise = await axios.get(`/${endpoints.branches.areaCodes}`);
+    //   const [usersResponse, branchesResponse, areaCodesResponse] = await Promise.all([
+    //     usersPromise,
+    //     branchesPromise,
+    //     areaCodesPromise,
+    //   ]);
+    //   // Update the states with the fetched data
+    //   setUsers(usersResponse.data.data);
+    //   setBranches(branchesResponse.data.data);
+    //   setAreas(areaCodesResponse.data.data);
+    //   console.table([
+    //     usersResponse.data.data,
+    //     branchesResponse.data.data,
+    //     areaCodesResponse.data.data,
+    //   ]);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  }, []);
+
   const notFound = !dataFiltered.length && !!searchContact;
 
   return (
-    <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose}>
+    <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
       <DialogTitle sx={{ pb: 0 }}>
-        Contacts <Typography component="span">({_contacts.length})</Typography>
+        Sewadars <Typography component="span">({_contacts.length})</Typography>
       </DialogTitle>
 
       <Box sx={{ px: 3, py: 2.5 }}>
-        <TextField
-          fullWidth
-          value={searchContact}
-          onChange={handleSearchContacts}
-          placeholder="Search..."
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
-              </InputAdornment>
-            ),
-          }}
-        />
+        <Grid container>
+          {/* <Grid item xs={12} sm={6} lg={3}>
+            <FormControl
+              sx={{
+                flexShrink: 0,
+                width: { xs: 1, md: 200 },
+              }}
+            >
+              <InputLabel>Zones</InputLabel>
+
+              <Select
+                input={<OutlinedInput label="Zones" />}
+                MenuProps={{
+                  PaperProps: {
+                    sx: { maxHeight: 240 },
+                  },
+                }}
+              >
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 0
+                </MenuItem>
+
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 1
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid> */}
+          <Grid item xs={12} sm={6} lg={3}>
+            <FormControl
+              sx={{
+                flexShrink: 0,
+                width: { xs: 1, md: 200 },
+              }}
+            >
+              <InputLabel>Branch</InputLabel>
+
+              <Select
+                input={<OutlinedInput label="Branch" />}
+                MenuProps={{
+                  PaperProps: {
+                    sx: { maxHeight: 240 },
+                  },
+                }}
+              >
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 0
+                </MenuItem>
+
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 1
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={3} mb={2}>
+            <FormControl
+              sx={{
+                flexShrink: 0,
+                width: { xs: 1, md: 200 },
+              }}
+            >
+              <InputLabel>Areas</InputLabel>
+
+              <Select
+                input={<OutlinedInput label="Areas" />}
+                MenuProps={{
+                  PaperProps: {
+                    sx: { maxHeight: 240 },
+                  },
+                }}
+              >
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 0
+                </MenuItem>
+
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 1
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={3} mb={2}>
+            <FormControl
+              sx={{
+                flexShrink: 0,
+                width: { xs: 1, md: 200 },
+              }}
+            >
+              <InputLabel>Groups</InputLabel>
+
+              <Select
+                input={<OutlinedInput label="Groups" />}
+                MenuProps={{
+                  PaperProps: {
+                    sx: { maxHeight: 240 },
+                  },
+                }}
+              >
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 0
+                </MenuItem>
+
+                <MenuItem key="random" value={10}>
+                  <Checkbox disableRipple size="small" />
+                  Option 1
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid xs={12}>
+            <TextField
+              fullWidth
+              value={searchContact}
+              onChange={handleSearchContacts}
+              placeholder="Search..."
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+        </Grid>
       </Box>
 
       <DialogContent sx={{ p: 0 }}>
@@ -74,26 +230,8 @@ export default function KanbanContactsDialog({ assignee = [], open, onClose }) {
               const checked = assignee.map((person) => person.name).includes(contact.name);
 
               return (
-                <ListItem
-                  key={contact.id}
-                  disableGutters
-                  secondaryAction={
-                    <Button
-                      size="small"
-                      color={checked ? 'primary' : 'inherit'}
-                      startIcon={
-                        <Iconify
-                          width={16}
-                          icon={checked ? 'eva:checkmark-fill' : 'mingcute:add-line'}
-                          sx={{ mr: -0.5 }}
-                        />
-                      }
-                    >
-                      {checked ? 'Assigned' : 'Assign'}
-                    </Button>
-                  }
-                  sx={{ height: ITEM_HEIGHT }}
-                >
+                <ListItem key={contact.id} disableGutters sx={{ height: ITEM_HEIGHT }}>
+                  <Checkbox sx={{ mr: 2 }} />
                   <ListItemAvatar>
                     <Avatar src={contact.avatarUrl} />
                   </ListItemAvatar>
